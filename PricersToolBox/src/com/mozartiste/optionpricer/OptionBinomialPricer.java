@@ -1,6 +1,7 @@
 package com.mozartiste.optionpricer;
 
-import java.text.DecimalFormat;
+import com.mozartiste.optionpricer.ENUMS.ExerciseType;
+import com.mozartiste.optionpricer.ENUMS.OptionType;
 
 public class OptionBinomialPricer implements IPricer{
 	//constructors

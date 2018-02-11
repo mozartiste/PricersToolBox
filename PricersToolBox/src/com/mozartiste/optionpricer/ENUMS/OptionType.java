@@ -1,4 +1,4 @@
-package com.mozartiste.optionpricer;
+package com.mozartiste.optionpricer.ENUMS;
 
 public enum OptionType {
 	CALL ("Call"), PUT ("Put");

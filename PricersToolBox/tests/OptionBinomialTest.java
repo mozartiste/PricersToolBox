@@ -4,11 +4,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.mozartiste.optionpricer.ExerciseType;
 import com.mozartiste.optionpricer.IPricer;
 import com.mozartiste.optionpricer.InputsOptions;
 import com.mozartiste.optionpricer.OptionBinomialPricer;
-import com.mozartiste.optionpricer.OptionType;
+import com.mozartiste.optionpricer.ENUMS.ExerciseType;
+import com.mozartiste.optionpricer.ENUMS.OptionType;
 
 public class OptionBinomialTest {
 	protected InputsOptions inputs;

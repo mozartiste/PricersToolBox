@@ -1,5 +1,8 @@
 package com.mozartiste.optionpricer;
 
+import com.mozartiste.optionpricer.ENUMS.ExerciseType;
+import com.mozartiste.optionpricer.ENUMS.OptionType;
+
 public class InputsOptions implements IModelInputs{
 
 

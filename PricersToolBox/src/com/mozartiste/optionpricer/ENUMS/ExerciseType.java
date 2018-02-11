@@ -1,4 +1,4 @@
-package com.mozartiste.optionpricer;
+package com.mozartiste.optionpricer.ENUMS;
 
 public enum ExerciseType {
 	EUROPEAN("European"), AMERICAN("American");
