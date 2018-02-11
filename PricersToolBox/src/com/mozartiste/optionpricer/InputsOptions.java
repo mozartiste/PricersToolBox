@@ -4,7 +4,7 @@ public class InputsOptions implements IModelInputs{
 
 
 
-	private double assset;
+	private double spot;
 	private double strike;
 	private double vol;
 	private double r;
@@ -14,10 +14,10 @@ public class InputsOptions implements IModelInputs{
     private ExerciseType exercise;
     
 	//constructor
-	public InputsOptions(double assset, double strike, double vol, double r, int noSteps, double expiry,
+	public InputsOptions(double spot, double strike, double vol, double r, int noSteps, double expiry,
 			OptionType type, ExerciseType exercise) {
 		super();
-		this.assset = assset;
+		this.spot = spot;
 		this.strike = strike;
 		this.vol = vol;
 		this.r = r;
@@ -28,11 +28,11 @@ public class InputsOptions implements IModelInputs{
 	}
 	
 	//getters and setters
-	public double getAssset() {
-		return assset;
+	public double getSpot() {
+		return spot;
 	}
 	public void setAssset(double assset) {
-		this.assset = assset;
+		this.spot = assset;
 	}
 	public double getStrike() {
 		return strike;
