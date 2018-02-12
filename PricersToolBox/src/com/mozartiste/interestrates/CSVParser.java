@@ -9,11 +9,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class CSVParser implements IParser<InterestRateCurve>{
-	InterestRateCurve RateCurve ;
+	private InterestRateCurve RateCurve ;
+	private String DateFormat;
 
-	public CSVParser(InterestRateCurve rateCurve) {
+	public CSVParser(InterestRateCurve rateCurve, String dateFormat) {
 		super();
 		RateCurve = rateCurve;
+		DateFormat = dateFormat;
 	}
 
 	public InterestRateCurve parse(String inputFile, String cvsSplitBy, String DateFormat) {
@@ -52,7 +54,7 @@ public class CSVParser implements IParser<InterestRateCurve>{
 	@Override
 	public InterestRateCurve parse(String inputFile) {
 		// default separator as comma
-		InterestRateCurve rval = this.parse(inputFile,",", "yyyy-dd-MM") ;
+		InterestRateCurve rval = this.parse(inputFile,",", this.DateFormat) ;
 		return rval;
 	}
 

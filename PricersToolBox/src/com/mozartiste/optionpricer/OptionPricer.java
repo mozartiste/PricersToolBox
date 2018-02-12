@@ -19,11 +19,12 @@ public class OptionPricer {
 		// TODO Auto-generated method stub
 
 		try {
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-dd-MM");
+		String dateFormat="yyyy-dd-MM";
+		SimpleDateFormat df = new SimpleDateFormat(dateFormat);
 		Date curDate;
 		curDate = df.parse("2010-01-01");
 		InterestRateCurve myInterestCurve = new InterestRateCurve(curDate,InterpolationMethod.LINEAR,ExtrapolationMethod.CONSTANT);
-		IParser<InterestRateCurve> parser = new CSVParser(myInterestCurve);
+		IParser<InterestRateCurve> parser = new CSVParser(myInterestCurve,dateFormat);
 		InterestRateCurve interestRate=parser.parse("/Users/mehdi/git/PricersToolBox/PricersToolBox/AAA.csv");
 		Double rate=interestRate.GetRate(12);
 		int a =2;
