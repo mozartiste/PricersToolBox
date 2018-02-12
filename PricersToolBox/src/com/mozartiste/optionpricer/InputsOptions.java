@@ -1,5 +1,6 @@
 package com.mozartiste.optionpricer;
 
+import com.mozartiste.interestrates.InterestRate;
 import com.mozartiste.optionpricer.ENUMS.ExerciseType;
 import com.mozartiste.optionpricer.ENUMS.OptionType;
 
@@ -10,14 +11,14 @@ public class InputsOptions implements IModelInputs{
 	private double spot;
 	private double strike;
 	private double vol;
-	private double r;
+	private InterestRate r;
 	private int noSteps;
 	private double expiry;
 	private OptionType type;
     private ExerciseType exercise;
     
 	//constructor
-	public InputsOptions(double spot, double strike, double vol, double r, int noSteps, double expiry,
+	public InputsOptions(double spot, double strike, double vol, InterestRate r, int noSteps, double expiry,
 			OptionType type, ExerciseType exercise) {
 		super();
 		this.spot = spot;
@@ -49,10 +50,10 @@ public class InputsOptions implements IModelInputs{
 	public void setVol(double vol) {
 		this.vol = vol;
 	}
-	public double getR() {
+	public InterestRate getR() {
 		return r;
 	}
-	public void setR(double r) {
+	public void setR(InterestRate r) {
 		this.r = r;
 	}
 	public int getNoSteps() {

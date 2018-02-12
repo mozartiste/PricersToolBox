@@ -6,7 +6,7 @@ import java.util.TreeMap;
 
 import com.mozartiste.utils.DateUtil;
 
-public class InterestRateCurve {
+public class InterestRateCurve implements InterestRate{
 	
 	public InterestRateCurve(Date refDate, InterpolationMethod interpolationMethod,
 			ExtrapolationMethod extrapolationMethod) {
@@ -16,7 +16,7 @@ public class InterestRateCurve {
 		this.extrapolationMethod = extrapolationMethod;
 	}
 
-	private TreeMap<Integer, Double> ratecurve = new TreeMap<>();
+	private TreeMap<Double, Double> ratecurve = new TreeMap<>();
 	private Date refDate =new Date();//date reference for the interest rate curve
 	private InterpolationMethod	interpolationMethod	= InterpolationMethod.LINEAR;
 	private ExtrapolationMethod	extrapolationMethod = ExtrapolationMethod.CONSTANT;
@@ -33,17 +33,19 @@ public class InterestRateCurve {
 		LINEAR
 	}
 	
-	
+	@Override
 	public Double GetRate(Date d){
-		int nbDays= DateUtil.nbDays(refDate, d);
-		double rval;
+		Double nbDays= DateUtil.nbDays(refDate, d);
+		Double rval;
 		// TODO Add spline interpolation
 		if (interpolationMethod.equals(InterpolationMethod.LINEAR)) rval = LinearInterpolation(nbDays);
-		else rval =0;
+		else rval =.0;
 		
 		return rval;
 	}
-	public Double GetRate(int d){
+	
+	@Override
+	public Double GetRate(Double d){
 		double rval;
 		// TODO Add spline interpolation
 		if (interpolationMethod.equals(InterpolationMethod.LINEAR)) rval = LinearInterpolation(d);
@@ -51,17 +53,17 @@ public class InterestRateCurve {
 		return rval;
 	}
 	
-	public void Add(int d, Double rate){
+	public void Add(Double d, Double rate){
 		 ratecurve.put(d, rate) ;
 	}
 	
 	public void Add(Date d, Double rate){
-		int nbDays= DateUtil.nbDays(refDate, d);
+		Double nbDays= DateUtil.nbDays(refDate, d);
 		 ratecurve.put(nbDays, rate) ;
 	}
 	
-	public double LinearInterpolation(int x) {
-		Map.Entry<Integer,Double> e1, e2;
+	public double LinearInterpolation(Double x) {
+		Map.Entry<Double,Double> e1, e2;
 		double x1, x2;
 		double y1, y2;
 		

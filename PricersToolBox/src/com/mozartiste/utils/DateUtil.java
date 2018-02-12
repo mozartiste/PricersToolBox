@@ -14,9 +14,9 @@ public class DateUtil {
         return cal.getTime();
     }
     
-    public static int nbDays(Date begin, Date end) {
+    public static Double nbDays(Date begin, Date end) {
 	    	long difference = end.getTime() - begin.getTime();
-	    	int nbDays = new BigDecimal(difference / (1000*60*60*24)).intValueExact();
+	    	Double nbDays = new BigDecimal(difference / (1000*60*60*24)).doubleValue();
 	    	return nbDays;
     }
 }

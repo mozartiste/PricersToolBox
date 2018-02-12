@@ -1,5 +1,6 @@
 package com.mozartiste.optionpricer;
 
+import com.mozartiste.interestrates.InterestRate;
 import com.mozartiste.optionpricer.ENUMS.ExerciseType;
 import com.mozartiste.optionpricer.ENUMS.OptionType;
 
@@ -19,7 +20,7 @@ public class OptionBinomialPricer implements IPricer{
     private Double[][] payOff;
     
 	//Methods
-    public double getRate() {
+    public InterestRate getRate() {
     		return inputs.getR();
     }
     
@@ -33,14 +34,15 @@ public class OptionBinomialPricer implements IPricer{
 		double expiry=inputs.getExpiry();
 	    OptionType type=inputs.getType();
 	    ExerciseType exercise=inputs.getExercise();
+	    InterestRate interestRate=inputs.getR();
 		
 	    double timestep = expiry/noSteps;
-	    double DF = Math.exp(-getRate()*timestep);
-	    double temp1 = Math.exp((getRate() + vol * vol)*timestep);
+	    double DF = Math.exp(-interestRate.GetRate(1.)*timestep);
+	    double temp1 = Math.exp((interestRate.GetRate(1.) + vol * vol)*timestep);
 	    double temp2 = 0.5 * (DF + temp1);
 	    double up = temp2 + Math.sqrt(temp2*temp2 - 1);
 	    double down = 1/ up;
-	    double probaUp = (Math.exp(getRate() * timestep) - down)/(up -down)  ;
+	    double probaUp = (Math.exp(interestRate.GetRate(1.) * timestep) - down)/(up -down)  ;
 	    double probaDown = 1 - probaUp;
 
 	    //stock price tree

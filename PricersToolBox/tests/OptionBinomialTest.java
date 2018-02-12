@@ -4,6 +4,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.mozartiste.interestrates.InterestFlatRate;
+import com.mozartiste.interestrates.InterestRate;
+import com.mozartiste.interestrates.InterestRateCurve;
 import com.mozartiste.optionpricer.IPricer;
 import com.mozartiste.optionpricer.InputsOptions;
 import com.mozartiste.optionpricer.OptionBinomialPricer;
@@ -18,11 +21,11 @@ public class OptionBinomialTest {
 		// Exemple : European Call
 		// Spot 100
 		// Strike 90
-		// interest rate 0.05
+		InterestRate interestRate = new InterestFlatRate(0.05);// interest rate 0.05
 		// volatility 20 %
 		// maturity 3 months : 0,25
 		// number of simulations 1000
-		inputs = new InputsOptions(new Integer(100), new Integer(90), new Double(.20), new Double(0.05), new Integer(500), new Double(0.25), OptionType.CALL, ExerciseType.EUROPEAN);
+		inputs = new InputsOptions(new Integer(100), new Integer(90), new Double(.20), interestRate, new Integer(500), new Double(0.25), OptionType.CALL, ExerciseType.EUROPEAN);
 	    pricer = new OptionBinomialPricer(inputs);
 	}
 

@@ -26,7 +26,7 @@ public class OptionPricer {
 		InterestRateCurve myInterestCurve = new InterestRateCurve(curDate,InterpolationMethod.LINEAR,ExtrapolationMethod.CONSTANT);
 		IParser<InterestRateCurve> parser = new CSVParser(myInterestCurve,dateFormat);
 		InterestRateCurve interestRate=parser.parse("/Users/mehdi/git/PricersToolBox/PricersToolBox/AAA.csv");
-		Double rate=interestRate.GetRate(12);
+		Double rate=interestRate.GetRate(12.);
 		int a =2;
 		
 		} catch (ParseException e) {
