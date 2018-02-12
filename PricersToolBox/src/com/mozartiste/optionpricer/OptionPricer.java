@@ -1,25 +1,38 @@
 package com.mozartiste.optionpricer;
 
-import com.mozartiste.optionpricer.ENUMS.ExerciseType;
-import com.mozartiste.optionpricer.ENUMS.OptionType;
+import java.io.OutputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.print.event.PrintJobAttributeListener;
+
+import com.mozartiste.interestrates.CSVParser;
+import com.mozartiste.interestrates.IParser;
+import com.mozartiste.interestrates.InterestRateCurve;
+import com.mozartiste.interestrates.InterestRateCurve.ExtrapolationMethod;
+import com.mozartiste.interestrates.InterestRateCurve.InterpolationMethod;
 
 public class OptionPricer {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		// Exemple : Européan Call
-		// Sport 100
-		// Strike 90
-		// interest rate 0.05
-		// volatility 20 %
-		// maturity 3 months : 0,25
-		// number of simulations 1000
-		
-		InputsOptions inputs = new InputsOptions(100, 90, .20, 0.05, 500, 0.25, OptionType.CALL, ExerciseType.EUROPEAN);
-		IPricer pricer = new OptionBinomialPricer(inputs);
-		double a = pricer.GetValue();
-		System.out.println(a);
 
+		try {
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-dd-MM");
+		Date curDate;
+		curDate = df.parse("2010-01-01");
+		InterestRateCurve myInterestCurve = new InterestRateCurve(curDate,InterpolationMethod.LINEAR,ExtrapolationMethod.CONSTANT);
+		IParser<InterestRateCurve> parser = new CSVParser(myInterestCurve);
+		InterestRateCurve interestRate=parser.parse("/Users/mehdi/git/PricersToolBox/PricersToolBox/AAA.csv");
+		Double rate=interestRate.GetRate(12);
+		int a =2;
+		
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }

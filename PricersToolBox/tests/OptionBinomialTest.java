@@ -16,7 +16,7 @@ public class OptionBinomialTest {
 	@Before
 	public void setUp() throws Exception {
 		// Exemple : European Call
-		// Sport 100
+		// Spot 100
 		// Strike 90
 		// interest rate 0.05
 		// volatility 20 %
