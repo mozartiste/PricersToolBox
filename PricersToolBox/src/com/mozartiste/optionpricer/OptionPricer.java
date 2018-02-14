@@ -40,13 +40,12 @@ public class OptionPricer {
 		double ValueBiomial = priceBinomial.GetValue();
 		double vega=priceBinomial.GetVega();
 		double rho=priceBinomial.GetRho();
+		double delta=priceBinomial.GetDelta();
+		double gamma=priceBinomial.GetGamma();
+		double theta=priceBinomial.GetTheta();
 		double test =11.6702;
-		
-		
 
-		
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

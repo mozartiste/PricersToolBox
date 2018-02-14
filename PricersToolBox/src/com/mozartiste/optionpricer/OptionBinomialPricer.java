@@ -120,8 +120,8 @@ public class OptionBinomialPricer implements IPricer{
 		double valoDown=GetValue();
 		
 		inputs.setVol(inputs.getVol()+0.01);
-		vega = (valoUp - valoDown)/0.02;
-		return vega;
+		vega = (valoUp - valoDown)/0.02/100;
+		return Math.round(vega*10000)/10000.0;
 	}
 
 	@Override
@@ -141,7 +141,7 @@ public class OptionBinomialPricer implements IPricer{
 		//initial value
 		inputs.getR().translate(0.01);
 		rho = (valoUp - valoDown)/0.02/100;//convert in Bp
-		return rho;
+		return Math.round(rho*10000)/10000.0;
 	}
 	
 	public InputsOptions getInputs() {

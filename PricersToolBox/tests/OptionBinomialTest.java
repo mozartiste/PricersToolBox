@@ -21,10 +21,11 @@ public class OptionBinomialTest {
 		// Exemple : European Call
 		// Spot 100
 		// Strike 90
-		InterestRate interestRate = new InterestFlatRate(0.05);// interest rate 0.05
+		// interest rate 0.05
 		// volatility 20 %
 		// maturity 3 months : 0,25
 		// number of simulations 1000
+		InterestRate interestRate = new InterestFlatRate(0.05);
 		inputs = new InputsOptions(new Integer(100), new Integer(90), new Double(.20), interestRate, new Integer(500), new Double(0.25), OptionType.CALL, ExerciseType.EUROPEAN);
 	    pricer = new OptionBinomialPricer(inputs);
 	}
@@ -35,8 +36,28 @@ public class OptionBinomialTest {
 
 	@Test
 	public void testPricing() {
-		//11.6702
 		assertEquals(new Double(11.6702), new Double(pricer.GetValue()));
+	}
+	@Test
+	public void testDelta() {
+		assertEquals(new Double(0.8904), new Double(pricer.GetDelta()));
+	}
+	@Test
+	public void testGamma() {
+		assertEquals(new Double(0.0188), new Double(pricer.GetGamma()));
+	}
+	@Test
+	public void testVega() {
+		assertEquals(new Double(0.0935), new Double(pricer.GetVega()));
+	}
+	@Test
+	public void testTheta() {
+		assertEquals(new Double(-0.0209), new Double(pricer.GetTheta()));
+
+	}
+	@Test
+	public void testRho() {
+		assertEquals(new Double(0.1934), new Double(pricer.GetRho()));
 
 	}
 
