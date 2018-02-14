@@ -19,6 +19,13 @@ public class OptionBinomialPricer implements IPricer{
 	private Double[][] stockPrice;
     private Double[][] payOff;
     
+    //greecs
+    private double delta;
+    private double gamma;
+    private double theta;
+    private double vega;
+    private double rho;
+    
 	//Methods
     public InterestRate getRate() {
     		return inputs.getR();
@@ -83,34 +90,60 @@ public class OptionBinomialPricer implements IPricer{
             }
         }
 	    
+	    double deltaUp = (payOff[0][2]-payOff[1][2])/(stockPrice[0][2]-stockPrice[1][2]);
+	    double deltaDown = (payOff[1][2]-payOff[2][2])/(stockPrice[1][2]-stockPrice[2][2]);
+	    delta = (deltaUp + deltaDown) /2;
+	    gamma = (deltaUp-deltaDown)/((stockPrice[0][2]-stockPrice[2][2])/2);
+	    theta = (payOff[1][2]-payOff[0][0])/(365*2*timestep);//time in days
+	    
 	    long rounded = Math.round(payOff[0][0]*10000);
 	    return rounded/10000.0;
 	}
 
 	@Override
 	public double GetDelta() {
-		// TODO Auto-generated method stub
-		return 0;
+		GetValue();
+		return Math.round(delta*10000)/10000.0;
 	}
 
 	@Override
 	public double GetGamma() {
-		// TODO Auto-generated method stub
-		return 0;
+		GetValue();
+		return Math.round(gamma*10000)/10000.0;
 	}
 
 	@Override
 	public double GetVega() {
-		// TODO Auto-generated method stub
-		return 0;
+		inputs.setVol(inputs.getVol()+0.01);
+		double valoUp=GetValue();
+		inputs.setVol(inputs.getVol()-0.02);
+		double valoDown=GetValue();
+		
+		inputs.setVol(inputs.getVol()+0.01);
+		vega = (valoUp - valoDown)/0.02;
+		return vega;
 	}
 
 	@Override
 	public double GetTheta() {
-		// TODO Auto-generated method stub
-		return 0;
+		GetValue();
+		return Math.round(theta*10000)/10000.0;
 	}
 
+	@Override
+	public double GetRho() {
+		// r + 0.01
+		inputs.getR().translate(0.01);
+		double valoUp=GetValue();
+		// r - 0.01
+		inputs.getR().translate(-0.02);
+		double valoDown=GetValue();
+		//initial value
+		inputs.getR().translate(0.01);
+		rho = (valoUp - valoDown)/0.02/100;//convert in Bp
+		return rho;
+	}
+	
 	public InputsOptions getInputs() {
 		return inputs;
 	}
@@ -118,5 +151,7 @@ public class OptionBinomialPricer implements IPricer{
 	public void setInputs(InputsOptions inputs) {
 		this.inputs = inputs;
 	}
+
+
 
 }

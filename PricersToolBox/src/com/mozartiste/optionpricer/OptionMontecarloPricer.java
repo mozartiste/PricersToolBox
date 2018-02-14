@@ -1,5 +1,6 @@
 package com.mozartiste.optionpricer;
 
+import java.math.BigDecimal;
 import java.util.Random;
 
 import com.mozartiste.interestrates.InterestRate;
@@ -39,6 +40,11 @@ public class OptionMontecarloPricer implements IPricer {
 		return 0;
 	}
 	
+	@Override
+	public double GetRho() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 	//using the log-normal random walk
 	@Override
@@ -55,20 +61,25 @@ public class OptionMontecarloPricer implements IPricer {
 		double expiry=inputs.getExpiry();
 	    double r = interestRate.GetRate(.05);
 	    
-		int numTimeSteps = 100;
+		int numTimeSteps = new BigDecimal(expiry * 360).intValue() ;//time step is one day
 		double timestep = expiry / numTimeSteps;
 		double sigmaValues = 0;
 		
 		for (int j = 0; j < noSteps; j++) {
 			double asset = spot;
 			for (int i = 0; i < numTimeSteps; i++) {
-				asset = asset * Math.exp((r - 0.5 * vol) * timestep + Math.sqrt(vol * timestep) * rand.nextGaussian());
+				asset = asset * Math.exp((r - 0.5 * vol * vol) * timestep + vol * Math.sqrt( timestep) * rand.nextGaussian());
 			}
-			sigmaValues += Math.max(asset - strike, 0);
+			//test CALL PUT for European Option
+			if (type.equals(OptionType.CALL)) sigmaValues += Math.max(asset - strike, 0);
+			else sigmaValues += Math.max(strike - asset, 0);
 		}
 		double value = sigmaValues / noSteps * Math.exp(-r * expiry);
 		
 		return value;				
 	}
+
+
+
 
 }

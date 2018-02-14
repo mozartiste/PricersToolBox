@@ -77,4 +77,10 @@ public class OptionFiniteDifferencePricer implements IPricer{
 		return 0;
 	}
 
+	@Override
+	public double GetRho() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

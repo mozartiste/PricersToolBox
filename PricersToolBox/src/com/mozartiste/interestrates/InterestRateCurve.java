@@ -53,6 +53,15 @@ public class InterestRateCurve implements InterestRate{
 		return rval;
 	}
 	
+	@Override
+	public void translate(Double offset) {
+		for(Map.Entry<Double,Double> entry : ratecurve.entrySet()) {
+			Double key = entry.getKey();
+			Double value = entry.getValue() + offset;
+			ratecurve.put(key,value);
+			}		
+	}
+	
 	public void Add(Double d, Double rate){
 		 ratecurve.put(d, rate) ;
 	}
@@ -104,5 +113,9 @@ public class InterestRateCurve implements InterestRate{
 		
 		return (x - x1)/(x2-x1) * (y2-y1) + y1;
 	}
+
+
+	
+
 	
 }

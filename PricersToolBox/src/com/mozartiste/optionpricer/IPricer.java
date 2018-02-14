@@ -12,4 +12,5 @@ public interface IPricer {
 	public double GetGamma();
 	public double GetVega();
 	public double GetTheta();
+	public double GetRho();
 }
